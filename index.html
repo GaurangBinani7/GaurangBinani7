@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YatriSathi - Find Your Perfect Travel Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>YatriSathi</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="#guides">Guides</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="nav-profile">
+                <div class="profile-icon" onclick="toggleProfile()">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Welcome, Traveler!</h3>
+                            <p>Adventure Seeker</p>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Trips</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Guides</span>
+                        </div>
+                    </div>
+                    <div class="travel-interests">
+                        <h4>Travel Interests</h4>
+                        <div class="interest-tags">
+                            <span class="interest-tag active">Heritage</span>
+                            <span class="interest-tag">Food & Culture</span>
+                            <span class="interest-tag">Trekking</span>
+                        </div>
+                    </div>
+                    <div class="recent-trips">
+                        <h4>Recent Trips</h4>
+                        <div class="trip-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="trip-location">Jaipur, India</span>
+                                <span class="trip-date">Dec 2023</span>
+                            </div>
+                        </div>
+                        <div class="trip-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="trip-location">Rome, Italy</span>
+                                <span class="trip-date">Oct 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover the World with <span class="brand-text">YatriSathi</span></h1>
+            <p>Connect with local travel guides for authentic experiences. Explore destinations with experts who know every hidden gem.</p>
+            
+            <!-- Main Search -->
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="search-tab active" onclick="switchTab('destination')">
+                        <i class="fas fa-globe"></i>
+                        Find Destination
+                    </button>
+                    <button class="search-tab" onclick="switchTab('guide')">
+                        <i class="fas fa-user-tie"></i>
+                        Find Guide
+                    </button>
+                </div>
+                
+                <!-- Destination Search -->
+                <div class="search-form destination-search active" id="destinationSearch">
+                    <div class="search-input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="destinationInput" placeholder="Where do you want to explore? (City, State, Country)" onkeyup="searchDestinations(this.value)">
+                    </div>
+                    <button class="search-btn" onclick="performDestinationSearch()">
+                        <i class="fas fa-search"></i>
+                        Explore
+                    </button>
+                </div>
+                
+                <!-- Guide Search -->
+                <div class="search-form guide-search" id="guideSearch">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="guideLocationInput" placeholder="Location">
+                        </div>
+                        <div class="filter-group">
+                            <i class="fas fa-language"></i>
+                            <select id="languageFilter">
+                                <option value="">Language</option>
+                                <option value="english">English</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="french">French</option>
+                                <option value="german">German</option>
+                                <option value="italian">Italian</option>
+                                <option value="hindi">Hindi</option>
+                                <option value="mandarin">Mandarin</option>
+                                <option value="arabic">Arabic</option>
+                                <option value="japanese">Japanese</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <i class="fas fa-star"></i>
+                            <select id="specialityFilter">
+                                <option value="">Speciality</option>
+                                <option value="heritage">Heritage & Architecture</option>
+                                <option value="food">Food & Culture</option>
+                                <option value="trekking">Trekking & Adventure</option>
+                                <option value="nature">Nature & Wildlife</option>
+                                <option value="history">History & Museums</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="search-btn" onclick="performGuideSearch()">
+                        <i class="fas fa-search"></i>
+                        Find Guides
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+    </section>
+
+    <!-- Search Results -->
+    <section class="search-results" id="searchResults" style="display: none;">
+        <div class="container">
+            <div class="results-header">
+                <h2 id="resultsTitle">Search Results</h2>
+                <span id="resultsCount"></span>
+            </div>
+            <div class="results-content" id="resultsContent">
+                <!-- Results will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose YatriSathi?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Expert Local Guides</h3>
+                    <p>Connect with verified local experts who know every hidden gem and cultural secret of their destination.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Hourly Booking</h3>
+                    <p>Flexible hourly rates let you customize your experience. Pay only for the time you need.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Global Coverage</h3>
+                    <p>From bustling cities to remote villages, find guides in destinations across the world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Rated & Reviewed</h3>
+                    <p>All guides are rated by real travelers. Read authentic reviews before booking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="popular-destinations" id="destinations">
+        <div class="container">
+            <h2>Popular Destinations</h2>
+            <div class="destinations-grid">
+                <div class="destination-card" onclick="searchLocation('Jaipur, India')">
+                    <div class="destination-image">
+                        <div class="destination-overlay"></div>
+                        <i class="fas fa-fort-awesome"></i>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Jaipur, India</h3>
+                        <p>Heritage & Culture</p>
+                        <div class="destination-stats">
+                            <span><i class="fas fa-user-tie"></i> 5 Guides</span>
+                            <span><i class="fas fa-dollar-sign"></i> From $17/hr</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card" onclick="searchLocation('Rome, Italy')">
+                    <div class="destination-image">
+                        <div class="destination-overlay"></div>
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Rome, Italy</h3>
+                        <p>Ancient Heritage</p>
+                        <div class="destination-stats">
+                            <span><i class="fas fa-user-tie"></i> 2 Guides</span>
+                            <span><i class="fas fa-dollar-sign"></i> From $35/hr</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card" onclick="searchLocation('Tokyo, Japan')">
+                    <div class="destination-image">
+                        <div class="destination-overlay"></div>
+                        <i class="fas fa-torii-gate"></i>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Kyoto, Japan</h3>
+                        <p>Heritage & Temples</p>
+                        <div class="destination-stats">
+                            <span><i class="fas fa-user-tie"></i> 1 Guide</span>
+                            <span><i class="fas fa-dollar-sign"></i> From $27/hr</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card" onclick="searchLocation('Paris, France')">
+                    <div class="destination-image">
+                        <div class="destination-overlay"></div>
+                        <i class="fas fa-wine-glass"></i>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Lyon, France</h3>
+                        <p>Food & Wine</p>
+                        <div class="destination-stats">
+                            <span><i class="fas fa-user-tie"></i> 1 Guide</span>
+                            <span><i class="fas fa-dollar-sign"></i> From $28/hr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>YatriSathi</span>
+                    </div>
+                    <p>Your trusted companion for discovering the world through local eyes.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#guides">Guides</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YatriSathi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
